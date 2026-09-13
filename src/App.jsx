@@ -1,6 +1,25 @@
+import { useState } from 'react'
 import './App.css'
 
 function App() {
+  const [letterStage, setLetterStage] = useState(0)
+  const hearts = [
+    { className: 'heart heart1', style: { left: '6%', width: '16px', height: '16px', animationDelay: '0s', animationDuration: '2.2s' } },
+    { className: 'heart heart2', style: { left: '14%', width: '26px', height: '26px', animationDelay: '0.1s', animationDuration: '2.4s' } },
+    { className: 'heart heart3', style: { left: '24%', width: '18px', height: '18px', animationDelay: '0.2s', animationDuration: '2.1s' } },
+    { className: 'heart heart4', style: { left: '34%', width: '34px', height: '34px', animationDelay: '0.15s', animationDuration: '2.5s' } },
+    { className: 'heart heart5', style: { left: '44%', width: '14px', height: '14px', animationDelay: '0.05s', animationDuration: '2s' } },
+    { className: 'heart heart6', style: { left: '54%', width: '22px', height: '22px', animationDelay: '0.18s', animationDuration: '2.3s' } },
+    { className: 'heart heart7', style: { left: '64%', width: '30px', height: '30px', animationDelay: '0.08s', animationDuration: '2.4s' } },
+    { className: 'heart heart8', style: { left: '74%', width: '17px', height: '17px', animationDelay: '0.22s', animationDuration: '2.1s' } },
+    { className: 'heart heart9', style: { left: '84%', width: '24px', height: '24px', animationDelay: '0.12s', animationDuration: '2.35s' } },
+    { className: 'heart heart10', style: { left: '92%', width: '15px', height: '15px', animationDelay: '0.03s', animationDuration: '2s' } },
+  ]
+
+  const handleLetterClick = () => {
+    setLetterStage((currentStage) => Math.min(currentStage + 1, 2))
+  }
+
   return (
     <main className="love-page">
       <section className="page page-one">
@@ -76,15 +95,53 @@ function App() {
         <div className="script-line">Thokozani loves Ayakha</div>
 
         <div className="anniversary-copy">
-            <p>MaNyawuza, Faku, Mangoloti - Sthandwa sam I love you. Benikucela sthandwa sam to be mine and mine alone, ube yi themba lam, umaqondana wam. My last mjolo-relationship.</p>
+            <p>MaNyawuza, Faku, Mangoloti - Sthandwa sam I love you. Bengikucela sthandwa sam to be mine and mine alone, ube yi themba lam, umaqondana wam. My last mjolo-relationship.</p>
 
             <p>Thank you for respecting and loving me</p>
         </div>
 
         <figure className="photo-frame">
           <img src="/Ayakha_and_TK_together_firstdate.jpg" alt="Thokozani and Ayakha on their first date" className="couple-image" />
-          <figcaption className="photo-caption">their first date</figcaption>
+          <figcaption className="photo-caption">our first date</figcaption>
         </figure>
+      </section>
+
+      <section className={`page page-three ${letterStage >= 2 ? 'reveal-active' : ''}`}>
+        <div className="letter-stage">
+          <button
+            type="button"
+            className={`letter-image ${letterStage >= 1 ? 'opened' : ''}`}
+            onClick={handleLetterClick}
+            aria-label="Open love letter"
+          >
+            <div className="animated-mail" aria-hidden="true">
+              <div className="back-fold" />
+              <div className="letter">
+                <div className="letter-border" />
+                <div className="letter-title" />
+                <div className="letter-context" />
+                <div className="letter-stamp">
+                  <div className="letter-stamp-inner" />
+                </div>
+              </div>
+              <div className="top-fold" />
+              <div className="body" />
+              <div className="left-fold" />
+            </div>
+          </button>
+
+          <div className="letter-caption">tap twice to open</div>
+        </div>
+
+        <div className="love-message-overlay" aria-hidden={letterStage < 2}>
+          <div className="love-message-content">
+            <h2>I Love You!</h2>
+            <p>Ayakha</p>
+            {hearts.map((heart) => (
+              <div key={heart.className} className={heart.className} style={heart.style} />
+            ))}
+          </div>
+        </div>
       </section>
     </main>
   )
