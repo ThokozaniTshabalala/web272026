@@ -17,7 +17,7 @@ function App() {
   ]
 
   const handleLetterClick = () => {
-    setLetterStage((currentStage) => Math.min(currentStage + 1, 2))
+    setLetterStage((currentStage) => (currentStage === 0 ? 2 : 0))
   }
 
   return (

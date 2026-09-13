@@ -545,10 +545,6 @@
   opacity: 1;
 }
 
-.page-three.reveal-active .letter-image {
-  pointer-events: none;
-}
-
 @keyframes popIn {
   to {
     transform: scale(1);
